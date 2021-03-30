@@ -14,6 +14,10 @@ const itemSchema = new Schema(
 			type: String,
 			required: true
 		},
+		assigned_to: {
+			type: String,
+			required: true
+		},
 		due_date: {
 			type: String,
 			required: true
