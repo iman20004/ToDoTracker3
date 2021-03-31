@@ -127,6 +127,7 @@ const Homescreen = (props) => {
 	};
 
 	const createNewList = async () => {
+		props.tps.clearAllTransactions();
 		const length = todolists.length
 		const id = length >= 1 ? todolists[length - 1].id + Math.floor((Math.random() * 100) + 1) : 1;
 		let list = {
@@ -141,6 +142,7 @@ const Homescreen = (props) => {
 	};
 
 	const deleteList = async (_id) => {
+		props.tps.clearAllTransactions();
 		DeleteTodolist({ variables: { _id: _id }, refetchQueries: [{ query: GET_DB_TODOS }] });
 		refetch();
 		setActiveList({});
@@ -154,10 +156,15 @@ const Homescreen = (props) => {
 	};
 
 	const handleSetActive = (id) => {
+		props.tps.clearAllTransactions();
 		const todo = todolists.find(todo => todo.id === id || todo._id === id);
 		setActiveList(todo);
 	};
 
+	const handleCloseList = () => {
+        props.tps.clearAllTransactions();
+        setActiveList({});
+    }
 	
 	/*
 		Since we only have 3 modals, this sort of hardcoding isnt an issue, if there
@@ -225,6 +232,7 @@ const Homescreen = (props) => {
 									editItem={editItem} reorderItem={reorderItem}
 									setShowDelete={setShowDelete}
 									activeList={activeList} setActiveList={setActiveList}
+									closeList={handleCloseList}
 								/>
 							</div>
 						:
