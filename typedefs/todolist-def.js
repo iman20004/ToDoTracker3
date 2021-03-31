@@ -13,7 +13,6 @@ const typeDefs = gql `
 		_id: String!
 		id: Int!
 		description: String!
-		assignedTo: String!
 		due_date: String!
 		assigned_to: String!
 		completed:  Boolean!
