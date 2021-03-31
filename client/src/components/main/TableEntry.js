@@ -5,6 +5,7 @@ const TableEntry = (props) => {
     const { data } = props;
 
     const completeStyle = data.completed ? ' complete-task' : ' incomplete-task';
+    const assignedStyle = data.completed ? ' complete-assign' : ' incomplete-assign';
 
     const description = data.description;
     const due_date = data.due_date;
@@ -98,7 +99,7 @@ const TableEntry = (props) => {
                             autoFocus={true} defaultValue={assigned} type='text'
                             wType="outlined" barAnimation="solid" inputClass="table-input-class"
                         />
-                        : <div className="table-text"
+                        : <div className={`${assignedStyle} table-text`}
                             onClick={() => toggleAssignedEdit(!editingAssigned)}
                         >{assigned}
                         </div>
