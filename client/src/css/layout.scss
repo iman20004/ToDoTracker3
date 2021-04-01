@@ -54,10 +54,10 @@ html {
 }
 
 .table-header {
-    width: calc(100% - 56px);
+    width: calc(100% - 48px);
     box-sizing: border-box;
     margin-left: 24px;
-    margin-right: 32px;
+    margin-right: 24px;
 }
 
 .table-header-section {
@@ -70,7 +70,8 @@ html {
 
 .table-header-button {
     padding: 0;
-    margin-left: 36px;
+    margin-left: 18px;
+    margin-right: 18px;
 }
 
 .table-header-button-disabled{

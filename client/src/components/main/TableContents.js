@@ -4,6 +4,17 @@ import TableEntry   from './TableEntry';
 const TableContents = (props) => {
 
     const entries = props.activeList ? props.activeList.items : null;
+    
+    const isFirst = (key) => {
+        const firstID = entries.length >= 1 ? entries[0].id : -1
+        return firstID === key
+    }
+
+    const isLast = (key) => {
+        const LastID = entries.length >= 1 ? entries[entries.length - 1].id : -1
+        return LastID === key
+    }
+
     return (
         entries ? <div className=' table-entries container-primary'>
             {
@@ -12,6 +23,7 @@ const TableContents = (props) => {
                         data={entry} key={entry.id}
                         deleteItem={props.deleteItem} reorderItem={props.reorderItem}
                         editItem={props.editItem}
+                        first={isFirst(entry.id)} last={isLast(entry.id)}
                     />
                 ))
             }
