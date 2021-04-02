@@ -5,6 +5,8 @@ import { WButton, WRow, WCol } from 'wt-frontend';
 const TableHeader = (props) => {
 
     const buttonStyle = props.disabled ? ' table-header-button-disabled ' : 'table-header-button ';
+    const undoDisable = !props.stack.hasTransactionToUndo();
+    const redoDisable = !props.stack.hasTransactionToRedo();
     const clickDisabled = () => { };
 
     return (
@@ -27,10 +29,10 @@ const TableHeader = (props) => {
 
             <WCol size="3">
                 <div className="table-header-buttons">
-                    <WButton className={`${buttonStyle}`} onClick={props.undo} wType="texted" clickAnimation="ripple-light" shape="rounded">
+                    <WButton className="table-header-button" onClick={props.undo} wType="texted" clickAnimation={undoDisable ? '' : 'ripple-light'} shape="rounded" disabled={undoDisable ? 'true' : ''}>
                         <i className="material-icons">undo</i>
                     </WButton>
-                    <WButton className={`${buttonStyle}`} onClick={props.redo} wType="texted" clickAnimation="ripple-light" shape="rounded">
+                    <WButton className="table-header-button" onClick={props.redo} wType="texted" clickAnimation={redoDisable ? '' : 'ripple-light'} shape="rounded" disabled={redoDisable ? 'true' : ''}>
                         <i className="material-icons">redo</i>
                     </WButton>
                     <WButton onClick={props.disabled ? clickDisabled : props.addItem} wType="texted" className={`${buttonStyle}`}>
@@ -48,5 +50,7 @@ const TableHeader = (props) => {
         </WRow>
     );
 };
+
+
 
 export default TableHeader;

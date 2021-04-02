@@ -164,7 +164,7 @@ const Homescreen = (props) => {
 	const handleCloseList = () => {
         props.tps.clearAllTransactions();
         setActiveList({});
-    }
+	}
 	
 	/*
 		Since we only have 3 modals, this sort of hardcoding isnt an issue, if there
@@ -233,6 +233,7 @@ const Homescreen = (props) => {
 									activeList={activeList} setActiveList={setActiveList}
 									closeList={handleCloseList}
 									undo={tpsUndo} redo={tpsRedo}
+									stack={props.tps}
 								/>
 							</div>
 						:
