@@ -36,6 +36,7 @@ const Homescreen = (props) => {
 	const [AddTodoItem] 			= useMutation(mutations.ADD_ITEM);
 	const [SortTodoItems] 			= useMutation(mutations.SORT_ITEMS);
 	const [UnsortTodoItems] 		= useMutation(mutations.UNSORT_ITEMS);
+	const [TopList]				    = useMutation(mutations.TOP_LIST);
 
 
 	const { loading, error, data, refetch } = useQuery(GET_DB_TODOS);
@@ -107,9 +108,10 @@ const Homescreen = (props) => {
 			items[i] = item
 		}
 		let listID = activeList._id;
-		console.log(items)
+		let flag = 0;
+		if (field === 'completed') flag = 1;
 	
-		let transaction = new SortListItems_Transaction(items, listID, field, SortTodoItems, UnsortTodoItems);
+		let transaction = new SortListItems_Transaction(items, listID, field, flag, SortTodoItems, UnsortTodoItems);
 		props.tps.addTransaction(transaction);
 		tpsRedo();
 	};
@@ -158,6 +160,7 @@ const Homescreen = (props) => {
 			id: id,
 			name: 'Untitled',
 			owner: props.user._id,
+			top: true,
 			items: [],
 		}
 		const { data } = await AddTodolist({ variables: { todolist: list }, refetchQueries: [{ query: GET_DB_TODOS }] });
@@ -182,6 +185,7 @@ const Homescreen = (props) => {
 		props.tps.clearAllTransactions();
 		const todo = todolists.find(todo => todo.id === id || todo._id === id);
 		setActiveList(todo);
+		//const { data } = await AddTodolist({ variables: { todolist: list }, refetchQueries: [{ query: GET_DB_TODOS }] });
 	};
 
 	const handleCloseList = () => {
