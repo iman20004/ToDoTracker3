@@ -91,3 +91,29 @@ export const UPDATE_TODOLIST_FIELD = gql`
 		updateTodolistField(_id: $_id, field: $field, value: $value)
 	}
 `;
+
+export const SORT_ITEMS = gql`
+	mutation SortItems($_id: String!, $field: String!) {
+		sortItems(_id: $_id, field: $field) {
+			_id
+			id
+			description
+			due_date
+			assigned_to
+			completed
+		}
+	}
+`;
+
+export const UNSORT_ITEMS = gql`
+	mutation UnsortItems($_id: String!, $item: [ItemInput!]) {
+		unsortItems(_id: $_id, item: $item) {
+			_id
+			id
+			description
+			due_date
+			assigned_to
+			completed
+		}
+	}
+`;

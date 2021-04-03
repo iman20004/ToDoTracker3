@@ -14,7 +14,8 @@ import { WLayout, WLHeader, WLMain, WLSide } from 'wt-frontend';
 import { UpdateListField_Transaction, 
 	UpdateListItems_Transaction, 
 	ReorderItems_Transaction, 
-	EditItem_Transaction } 				from '../../utils/jsTPS';
+	EditItem_Transaction, 
+	SortListItems_Transaction } 				from '../../utils/jsTPS';
 import WInput from 'wt-frontend/build/components/winput/WInput';
 
 
@@ -33,6 +34,8 @@ const Homescreen = (props) => {
 	const [DeleteTodoItem] 			= useMutation(mutations.DELETE_ITEM);
 	const [AddTodolist] 			= useMutation(mutations.ADD_TODOLIST);
 	const [AddTodoItem] 			= useMutation(mutations.ADD_ITEM);
+	const [SortTodoItems] 			= useMutation(mutations.SORT_ITEMS);
+	const [UnsortTodoItems] 		= useMutation(mutations.UNSORT_ITEMS);
 
 
 	const { loading, error, data, refetch } = useQuery(GET_DB_TODOS);
@@ -90,6 +93,26 @@ const Homescreen = (props) => {
 		tpsRedo();
 	};
 
+	const sortItems = async (field) => {
+		let items = []
+		for (let i = 0; i < activeList.items.length; i++) {
+			let item = {
+				_id: activeList.items[i]._id,
+				id: activeList.items[i].id,
+				description: activeList.items[i].description,
+				due_date: activeList.items[i].due_date,
+				assigned_to: activeList.items[i].assigned_to,
+				completed: activeList.items[i].completed
+			}
+			items[i] = item
+		}
+		let listID = activeList._id;
+		console.log(items)
+	
+		let transaction = new SortListItems_Transaction(items, listID, field, SortTodoItems, UnsortTodoItems);
+		props.tps.addTransaction(transaction);
+		tpsRedo();
+	};
 
 	const deleteItem = async (item) => {
 		let listID = activeList._id;
@@ -234,6 +257,7 @@ const Homescreen = (props) => {
 									closeList={handleCloseList}
 									undo={tpsUndo} redo={tpsRedo}
 									stack={props.tps}
+									sortItems={sortItems}
 								/>
 							</div>
 						:

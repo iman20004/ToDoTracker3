@@ -163,6 +163,62 @@ module.exports = {
 			listItems = found.items;
 			return (found.items);
 
+		},
+
+		sortItems: async (_, args) => {
+			const { _id, field} = args;
+			const listId = new ObjectId(_id);
+			const found = await Todolist.findOne({_id: listId});
+			let listItems = found.items;
+
+			let increasingOrder = true;
+
+			for (let i = 0; i < listItems.length - 1; i++) {
+				if (listItems[i][field] > listItems[i + 1][field])
+				increasingOrder = false;
+				break;
+			}
+
+			let sortIncreasing = true;
+			if (increasingOrder) {
+				sortIncreasing = false;
+			}
+			
+			let compareFunction = function (item1, item2) {
+				let negate = -1;
+				if (sortIncreasing) {
+				  negate = 1;
+				}
+				let value1 = item1[field];
+				let value2 = item2[field];
+				if (value1 < value2) { 
+				  return -1 * negate;
+				}
+				else if (value1 === value2) {
+				  return 0;
+				}
+				else {
+				  return 1 * negate;
+				}
+			}
+
+			listItems = listItems.sort(compareFunction);
+			const updated = await Todolist.updateOne({_id: listId}, { items: listItems })
+			if(updated) return (listItems);
+			listItems = found.items;
+			return (found.items);
+
+		},
+
+		unsortItems: async (_, args) => {
+			const { _id, item} = args;
+			const listId = new ObjectId(_id);
+
+			const found = await Todolist.findOne({_id: listId});
+
+			const updated = await Todolist.updateOne({_id: listId}, { items: item});
+			if(updated) return (item);
+			return (found.items);
 		}
 
 	}

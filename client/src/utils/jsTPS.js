@@ -118,8 +118,31 @@ export class UpdateListItems_Transaction extends jsTPS_Transaction {
     }
 }
 
+export class SortListItems_Transaction extends jsTPS_Transaction {
+    constructor(items, listID, field, redoCallback, undoCallback) {
+        super();
+        this.items = items;
+        this.listID = listID;
+        this.field = field;
+        this.redoCallback = redoCallback;
+        this.undoCallback = undoCallback;
+    }
 
+    async doTransaction() {
+        const { data } = await this.redoCallback({ 
+            variables: { _id: this.listID, field: this.field}
+        })
+        return data;
+    }
 
+    async undoTransaction() {
+        console.log(this.items)
+        const { data } = await this.undoCallback({
+            variables: { _id: this.listID, item: this.items} 
+        })
+        return data;
+    }
+}
 
 export class jsTPS {
     constructor() {
