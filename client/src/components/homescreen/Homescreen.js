@@ -181,11 +181,12 @@ const Homescreen = (props) => {
 
 	};
 
-	const handleSetActive = (id) => {
+	const handleSetActive = async (id) => {
 		props.tps.clearAllTransactions();
 		const todo = todolists.find(todo => todo.id === id || todo._id === id);
+		const { data } = await TopList({ variables: { _id: todo._id }, refetchQueries: [{ query: GET_DB_TODOS }] });
+		refetch();
 		setActiveList(todo);
-		//const { data } = await AddTodolist({ variables: { todolist: list }, refetchQueries: [{ query: GET_DB_TODOS }] });
 	};
 
 	const handleCloseList = () => {

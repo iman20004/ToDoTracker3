@@ -14,7 +14,7 @@ module.exports = {
 		getAllTodos: async (_, __, { req }) => {
 			const _id = new ObjectId(req.userId);
 			if(!_id) { return([])};
-			const todolists = await Todolist.find({owner: _id});
+			const todolists = await Todolist.find({owner: _id}).sort({top: -1});
 			if(todolists) return (todolists);
 
 		},
@@ -259,6 +259,19 @@ module.exports = {
 			const updated = await Todolist.updateOne({_id: listId}, { items: item});
 			if(updated) return (item);
 			return (found.items);
+		},
+
+		topList: async (_, args) => {
+			const { _id } = args;
+			const listId = new ObjectId(_id);
+
+			const oldtop = await Todolist.findOne({ top: true});
+			const updated1 = await Todolist.updateOne({_id: new ObjectId(oldtop._id)}, { top: false});
+
+			const updated2 = await Todolist.updateOne({_id: listId}, { top: true});
+
+			if(updated1 && updated2) return listId;
+			else return ('Could not move todolist to top');
 		}
 
 	}
