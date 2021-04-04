@@ -137,6 +137,10 @@ html, body {
     color: var(--light-gray);
 }
 
+.table-header-button:hover {
+    background-color: var(--blue-gray);
+}
+
 .table-header-button-disabled {
     transition: 0.1s ease-in-out;
     color: var(--warm-black);
@@ -200,4 +204,8 @@ html, body {
 
 .table-entry-buttons {
     color: $text-color;
+}
+
+.table-entry-buttons:hover {
+    background-color: var(--blue-gray);
 }
