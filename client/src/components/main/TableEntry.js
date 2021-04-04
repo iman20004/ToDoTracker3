@@ -48,7 +48,7 @@ const TableEntry = (props) => {
         toggleAssignedEdit(false);
         const newAssigned = e.target.value ? e.target.value : 'No Assignment';
         const prevAssigned = assigned;
-        if (newAssigned != prevAssigned){
+        if (newAssigned !== prevAssigned){
             props.editItem(data._id, 'assigned_to', newAssigned, prevAssigned);
         }
     };
