@@ -168,22 +168,25 @@ module.exports = {
 
 		sortItems: async (_, args) => {
 			const { _id, field}= args;
-			const listId = new ObjectId(_id);
-			const found = await Todolist.findOne({_id: listId});
-			let listItems = found.items;
+ 			const listId = new ObjectId(_id);
+ 			const found = await Todolist.findOne({_id: listId});
+ 			let listItems = found.items;
 
 			let increasingOrder = true;
-			for (let i = 0; i < listItems.length - 1; i++) {
-				if (listItems[i][field] > listItems[i + 1][field])
+			 
+ 			for (let i = 0; i < listItems.length - 1; i++) {
+				if (listItems[i][field] > listItems[i + 1][field]){
 					increasingOrder = false;
 					break;
+				}
 			}
-
+			
+			
 			let sortIncreasing = true;
 			if (increasingOrder) {
 				sortIncreasing = false;
 			};
-			
+
 			listItems = listItems.sort(function (item1, item2) {
 				let negate = -1;
 				if (sortIncreasing) {
