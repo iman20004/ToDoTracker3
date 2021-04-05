@@ -108,10 +108,8 @@ const Homescreen = (props) => {
 			items[i] = item
 		}
 		let listID = activeList._id;
-		let flag = 0;
-		if (field === 'completed') flag = 1;
-	
-		let transaction = new SortListItems_Transaction(items, listID, field, flag, SortTodoItems, UnsortTodoItems);
+		
+		let transaction = new SortListItems_Transaction(items, listID, field, SortTodoItems, UnsortTodoItems);
 		props.tps.addTransaction(transaction);
 		tpsRedo();
 	};
