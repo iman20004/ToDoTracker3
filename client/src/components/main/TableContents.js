@@ -22,7 +22,7 @@ const TableContents = (props) => {
                     <TableEntry
                         data={entry} key={entry.id}
                         deleteItem={props.deleteItem} reorderItem={props.reorderItem}
-                        editItem={props.editItem}
+                        editItem={props.editItem} index={index}
                         first={isFirst(entry.id)} last={isLast(entry.id)}
                     />
                 ))
