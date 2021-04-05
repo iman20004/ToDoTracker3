@@ -108,10 +108,24 @@ const Homescreen = (props) => {
 			items[i] = item
 		}
 		let listID = activeList._id;
+
+		// Checking if list is empty or if all items of that field are the same
+		let same = true;
+		if (items.length !== 0) {
+			let first = items[0][field]
+			for (let i = 1; i < items.length; i++) {
+				if (first !== items[i][field]) {
+					same = false;
+					break;
+				}
+			}
+		}
 		
-		let transaction = new SortListItems_Transaction(items, listID, field, SortTodoItems, UnsortTodoItems);
-		props.tps.addTransaction(transaction);
-		tpsRedo();
+		if (!same){
+			let transaction = new SortListItems_Transaction(items, listID, field, SortTodoItems, UnsortTodoItems);
+			props.tps.addTransaction(transaction);
+			tpsRedo();
+		}
 	};
 
 	const deleteItem = async (item, index) => {
