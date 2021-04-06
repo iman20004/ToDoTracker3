@@ -57,7 +57,7 @@ const Homescreen = (props) => {
 			}
 		}
 	}
-
+	
 	const tpsUndo = async () => {
 		const retVal = await props.tps.undoTransaction();
 		refetchTodos(refetch);
@@ -70,6 +70,20 @@ const Homescreen = (props) => {
 		return retVal;
 	}
 
+	const keydownHandler = (event) => {
+		if (event.ctrlKey) {
+			if (event.keyCode === 90) {
+				if (props.tps.hasTransactionToUndo()) {
+			  		tpsUndo();
+				}
+				event.preventDefault();
+		  	}
+		  
+		  	else if (event.keyCode === 89){
+				tpsRedo();
+		  	}
+		} 
+	}
 
 	// Creates a default item and passes it to the backend resolver.
 	// The return id is assigned to the item, and the item is appended
@@ -233,6 +247,14 @@ const Homescreen = (props) => {
 		toggleShowLogin(false);
 		toggleShowDelete(!showDelete)
 	}
+
+	useEffect(() => {
+		document.addEventListener('keydown', keydownHandler);
+	
+		return () => {
+			document.removeEventListener('keydown', keydownHandler);
+		};
+	}, [keydownHandler]);
 
 	return (
 		<WLayout wLayout="header-lside">
