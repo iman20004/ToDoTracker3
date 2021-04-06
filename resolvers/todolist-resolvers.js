@@ -67,7 +67,10 @@ module.exports = {
 				top: top,
 				items: items
 			});
+
+			const oldtop = await Todolist.findOne({ top: true});
 			const updated = newList.save();
+			if (oldtop) {const updated1 = await Todolist.updateOne({_id: new ObjectId(oldtop._id)}, { top: false});}
 			if(updated) return objectId;
 			else return ('Could not add todolist');
 		},
@@ -94,6 +97,9 @@ module.exports = {
 		deleteTodolist: async (_, args) => {
 			const { _id } = args;
 			const objectId = new ObjectId(_id);
+			const newtop = await Todolist.findOne({ top: false});
+			const updated1 = await Todolist.updateOne({_id: new ObjectId(newtop._id)}, { top: true})
+			
 			const deleted = await Todolist.deleteOne({_id: objectId});
 			if(deleted) return true;
 			else return false;
@@ -131,7 +137,7 @@ module.exports = {
 					item[field] = value;
 				}
 			});
-			const updated = await Todolist.updateOne({_id: listId}, { items: listItems })
+			const updated = await Todolist.updateOne({_id: listId}, { items: listItems });
 			if(updated) return (listItems);
 			else return (found.items);
 		},
