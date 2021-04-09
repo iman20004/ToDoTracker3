@@ -5,8 +5,8 @@ import { WButton, WRow, WCol } from 'wt-frontend';
 const TableHeader = (props) => {
 
     const buttonStyle = props.disabled ? ' table-header-button-disabled ' : 'table-header-button ';
-    const undoDisable = !props.stack.hasTransactionToUndo();
-    const redoDisable = !props.stack.hasTransactionToRedo();
+    //const undoDisable = !props.stack.hasTransactionToUndo();
+    //const redoDisable = !props.stack.hasTransactionToRedo();
     const clickDisabled = () => { };
 
     const handleSortByDescription = () => {
@@ -45,10 +45,10 @@ const TableHeader = (props) => {
 
             <WCol size="3">
                 <div className="table-header-buttons">
-                    <WButton className="table-header-button" onClick={undoDisable ? clickDisabled : props.undo} wType="texted" clickAnimation={undoDisable ? '' : 'ripple-light'} shape="rounded" disabled={undoDisable ? 'true' : ''}>
+                    <WButton className="table-header-button" onClick={props.undoDisable ? clickDisabled : props.undo} wType="texted" clickAnimation={props.undoDisable ? '' : 'ripple-light'} shape="rounded" disabled={props.undoDisable ? 'true' : ''}>
                         <i className="material-icons">undo</i>
                     </WButton>
-                    <WButton className="table-header-button" onClick={redoDisable ? clickDisabled : props.redo} wType="texted" clickAnimation={redoDisable ? '' : 'ripple-light'} shape="rounded" disabled={redoDisable ? 'true' : ''}>
+                    <WButton className="table-header-button" onClick={props.redoDisable ? clickDisabled : props.redo} wType="texted" clickAnimation={props.redoDisable ? '' : 'ripple-light'} shape="rounded" disabled={props.redoDisable ? 'true' : ''}>
                         <i className="material-icons">redo</i>
                     </WButton>
                     <WButton onClick={props.disabled ? clickDisabled : props.addItem} wType="texted" className={`${buttonStyle}`}>

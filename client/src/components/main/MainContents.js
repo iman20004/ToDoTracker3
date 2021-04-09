@@ -11,6 +11,8 @@ const MainContents = (props) => {
                 closeList={props.closeList}
                 undo={props.undo} redo={props.redo} 
                 stack={props.stack} sortItems={props.sortItems}
+                redoDisable={props.redoDisable}
+                undoDisable={props.undoDisable}
             />
             <TableContents
                 key={props.activeList.id} activeList={props.activeList}

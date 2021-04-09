@@ -26,6 +26,9 @@ const Homescreen = (props) => {
 	const [showDelete, toggleShowDelete] 	= useState(false);
 	const [showLogin, toggleShowLogin] 		= useState(false);
 	const [showCreate, toggleShowCreate] 	= useState(false);
+	const [redoDisable, toggleRedo] 		= useState(true);
+	const [undoDisable, toggleUndo] 		= useState(true);
+
 
 	const [ReorderTodoItems] 		= useMutation(mutations.REORDER_ITEMS);
 	const [UpdateTodoItemField] 	= useMutation(mutations.UPDATE_ITEM_FIELD);
@@ -61,12 +64,16 @@ const Homescreen = (props) => {
 	const tpsUndo = async () => {
 		const retVal = await props.tps.undoTransaction();
 		refetchTodos(refetch);
+		toggleRedo(!props.tps.hasTransactionToRedo())
+		toggleUndo(!props.tps.hasTransactionToUndo())
 		return retVal;
 	}
 
 	const tpsRedo = async () => {
 		const retVal = await props.tps.doTransaction();
 		refetchTodos(refetch);
+		toggleRedo(!props.tps.hasTransactionToRedo())
+		toggleUndo(!props.tps.hasTransactionToUndo())
 		return retVal;
 	}
 
@@ -203,6 +210,8 @@ const Homescreen = (props) => {
 		DeleteTodolist({ variables: { _id: _id }, refetchQueries: [{ query: GET_DB_TODOS }] });
 		refetch();
 		setActiveList({});
+		toggleRedo(!props.tps.hasTransactionToRedo())
+		toggleUndo(!props.tps.hasTransactionToUndo())
 	};
 
 	const updateListField = async (_id, field, value, prev) => {
@@ -218,10 +227,14 @@ const Homescreen = (props) => {
 		const { data } = await TopList({ variables: { _id: todo._id }, refetchQueries: [{ query: GET_DB_TODOS }] });
 		refetch();
 		setActiveList(todo);
+		toggleRedo(!props.tps.hasTransactionToRedo())
+		toggleUndo(!props.tps.hasTransactionToUndo())
 	};
 
 	const handleCloseList = () => {
-        props.tps.clearAllTransactions();
+		props.tps.clearAllTransactions();
+		toggleRedo(!props.tps.hasTransactionToRedo())
+		toggleUndo(!props.tps.hasTransactionToUndo())
         setActiveList({});
 	}
 	
@@ -302,6 +315,8 @@ const Homescreen = (props) => {
 									undo={tpsUndo} redo={tpsRedo}
 									stack={props.tps}
 									sortItems={sortItems}
+									redoDisable={redoDisable}
+									undoDisable={undoDisable}
 								/>
 							</div>
 						:
