@@ -43,7 +43,9 @@ This is the second implementation of the ToDoTracker app using ReactJS and Node.
 
 
 ### Note 
-This application is making use of a front-end CSS framework called WolfieTools https://wolfie-tools-frontend.github.io/#/
+This application is making use of a front-end CSS framework called [WolfieTools](https://wolfie-tools-frontend.github.io/#/)
+
+
 
 
 
