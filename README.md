@@ -7,15 +7,21 @@ The ToDoTracker is a Web Application for creating todo lists.
 This is the second implementation of the ToDoTracker app using ReactJS and Node. It is developed as a front-end only Web app that will provide the user with a means for making and editing todo lists
 
 ### Functionality/Features
+- [x] Sign Up
+- [x] Login
 - [x] Create a Todo List
 - [x] Delete a Todo List (with verification)
 - [x] Edit Todo List name
 - [x] Most recently opened list appears at the top
 - [x] Add new list item
 - [x] Delete list item
-- [x] Edit List Item (Name, Due Date, Status)
+- [x] Edit List Item Name (Text Field)
+- [x] Edit List Item Due Date (Date picker)
+- [x] Edit List Item Status (Drop down)
+- [x] Edit List Item Assigned To (Text Field)
 - [x] Undo, Redo
 - [x] Reorder list items (move up and down)
+- [x] Sort list items by name, due date, status or assigned to field
 - [x] Fool proof design (disable buttons which can't be used and mouse over highlighting)
 - [x] Undo/Redo should also work using Control-Z and Control-Y.
 
@@ -33,10 +39,11 @@ This is the second implementation of the ToDoTracker app using ReactJS and Node.
 <img width="1000" alt="Screen Shot 2021-06-01 at 6 34 36 PM" src="https://user-images.githubusercontent.com/60799230/120398498-6107fc00-c308-11eb-884e-82663cad4e3d.png">
 
 ### Sort by Status
-<img width="1440" alt="Screen Shot 2021-06-01 at 7 24 03 PM" src="https://user-images.githubusercontent.com/60799230/120401914-f8704d80-c30e-11eb-8ded-f768e3e2ad08.png">
+<img width="1000" alt="Screen Shot 2021-06-01 at 7 24 03 PM" src="https://user-images.githubusercontent.com/60799230/120401914-f8704d80-c30e-11eb-8ded-f768e3e2ad08.png">
 
 
-
+### Note 
+This application is making use of a front-end CSS framework called WolfieTools https://wolfie-tools-frontend.github.io/#/
 
 
 
