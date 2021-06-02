@@ -4,7 +4,7 @@
 The ToDoTracker is a Web Application for creating todo lists.
 
 #### ToDoTracker Implementation 3
-This is the third implementation of the ToDoTracker app. It is developed as a full-stack MERN Web Application using Mongo Atlas, E􏰓press, React, Node, Apollo and GraphQL.
+This is the third implementation of the ToDoTracker app. It is developed as a full-stack MERN Web Application using Mongo Atlas, Ex􏰓press, React, Node, Apollo and GraphQL.
 
 ### Functionality/Features
 - [x] Sign Up
