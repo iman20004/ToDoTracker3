@@ -1,10 +1,10 @@
 # ToDoTracker
 ##### Authors: Iman Ali
 
-The ToDoTracker is a Web Application for creating todo lists.
+The ToDoTracker is a Web Application where users can sign up for an account and create todo lists with name, due date, status and assigned to fields. It also includes features such as undo, redo, sorting by􏰅 􏰎field, editing and reordering.
 
 #### ToDoTracker Implementation 3
-This is the third implementation of the ToDoTracker app. It is developed as a full-stack MERN Web Application using Mongo Atlas, Ex􏰓press, React, Node, Apollo and GraphQL.
+This is the third implementation of the ToDoTracker app. This version is developed as a full-stack MERN Web Application using Mongo Atlas, Ex􏰓press, React, Node, Apollo and GraphQL.
 
 ### Functionality/Features
 - [x] Sign Up
